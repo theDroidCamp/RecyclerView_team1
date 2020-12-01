@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.recycleviewer.adapter.MoviesAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,14 +22,13 @@ class MainActivity : AppCompatActivity() {
 
 
         refresher.setOnRefreshListener {
-          //  fetchMovies()
+            fetchMovies()
         }
 
-      //  fetchMovies()
+        fetchMovies()
 
     }
 
-/*
     private fun fetchMovies() {
         refresher.isRefreshing = true
 
@@ -53,9 +53,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showMovies(movies: List<Movie>) {
-       // recyclerView.layoutManager = LinearLayoutManager(this)
-       // recyclerView.adapter = MoviesAdapter(movies)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = MoviesAdapter(movies)
     }
-*/
 
 }
