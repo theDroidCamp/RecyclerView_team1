@@ -1,32 +1,28 @@
 package com.example.recycleviewer
 
-import android.graphics.Movie
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.recycleviewer.adapter.MoviesAdapter
+import com.example.recycleviewer.api.MoviesApi
+import com.example.recycleviewer.model.Movie
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
-    val refresher = findViewById<SwipeRefreshLayout>(R.id.refresher)
-    val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
 
         refresher.setOnRefreshListener {
             fetchMovies()
         }
 
         fetchMovies()
-
     }
 
     private fun fetchMovies() {
@@ -39,16 +35,12 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<List<Movie>>, response: Response<List<Movie>>) {
-
-               refresher.isRefreshing = false
+                refresher.isRefreshing = false
                 val movies = response.body()
-
                 movies?.let {
                     showMovies(it)
                 }
-
             }
-
         })
     }
 
